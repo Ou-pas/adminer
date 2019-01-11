@@ -1035,7 +1035,10 @@ bodyLoad('<?php echo (is_object($connection) ? preg_replace('~^(\d\.?\d).*~s', '
 	* @return null
 	*/
 	function tablesPrint($tables) {
-		echo "<ul id='tables'>" . script("mixin(qs('#tables'), {onmouseover: menuOver, onmouseout: menuOut});");
+
+        echo script_src("//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js");
+        echo "<input type='text' placeholder='recherche' class='fuzzy-search'>";
+		echo "<ul id='tables' class='list'>" . script("mixin(qs('#tables'), {onmouseover: menuOver, onmouseout: menuOut});");
 		foreach ($tables as $table => $status) {
 			$name = $this->tableName($status);
 			if ($name != "") {
@@ -1049,6 +1052,10 @@ bodyLoad('<?php echo (is_object($connection) ? preg_replace('~^(\d\.?\d).*~s', '
 			}
 		}
 		echo "</ul>\n";
+        echo script("var tablelist = new List('menu', { 
+              valueNames: ['structure']
+            });
+            </script>");
 	}
 
 }
